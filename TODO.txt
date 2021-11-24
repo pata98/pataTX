@@ -1,0 +1,22 @@
+1. lite version
+4ch proportional control
+
+3. Transmitter III
+****
+
+4. Transmitter IV
+- Software Power Control
+- 5ch (expandable)
+- Dual rate
+- Elevon mixing
+- Transmitter battery level monitor
+- Multiple COMM Module compatible
+
+
+TODO:
+- Bootloader		*
+- USB power line control	**
+- Battery charger control	**
+- LCD			*****
+- Case finish		*****
+- Gimble design		*
