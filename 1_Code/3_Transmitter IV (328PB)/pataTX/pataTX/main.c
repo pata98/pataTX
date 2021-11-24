@@ -1000,7 +1000,7 @@ uint8_t menu()
 	char* menu_display_l;
 	uint8_t enter = 0;
 	uint8_t addr;
-	uint8_t pre_addr;
+	uint8_t pre_addr, pre_mod;
 	menu_input = 0;
 	LCD_CLEAR();
 	
@@ -1020,6 +1020,7 @@ uint8_t menu()
 			// Display code 
 			menu_display_h = ">Model Number   ";
 			menu_display_l = " Mixing         ";
+			pre_mod = cur_model;
 			
 			// Enter Model Number mode
 			if (enter)
@@ -1087,7 +1088,7 @@ uint8_t menu()
 						if (enter)
 						{
 							// Save previous model data
-							pre_addr = cur_model * 15 + 1;
+							pre_addr = pre_mod * 15 + 1;
 							
 							eeprom_update_byte((uint8_t*)pre_addr,       trim[AILERON]);
 							eeprom_update_byte((uint8_t*)(pre_addr + 1), trim[ELEVATOR]);
@@ -1110,7 +1111,7 @@ uint8_t menu()
 							eeprom_update_byte((uint8_t*)121, cur_model);
 							
 							// Call new model data
-							addr = menu_input * 15 + 1;
+							addr = cur_model * 15 + 1;
 							
 							trim[AILERON]  = eeprom_read_byte((const uint8_t*)addr      );
 							trim[ELEVATOR] = eeprom_read_byte((const uint8_t*)(addr + 1));
@@ -2656,8 +2657,8 @@ uint8_t menu()
 					enter = menu_read();
 					if (menu_input < 0)
 						menu_input = 0;
-					else if (menu_input > 4)
-						menu_input = 4;
+					else if (menu_input > 1)
+						menu_input = 1;
 					
 					if (menu_input == 0)
 					{

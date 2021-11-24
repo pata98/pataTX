@@ -17,6 +17,5 @@ TODO:
 - Bootloader		*
 - USB power line control	**
 - Battery charger control	**
-- LCD			*****
 - Case finish		*****
 - Gimble design		*
