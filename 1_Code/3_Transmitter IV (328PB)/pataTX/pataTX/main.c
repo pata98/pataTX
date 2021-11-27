@@ -161,7 +161,7 @@
 #define PI3			0x80
 #define PI4			0x40
 #define PO1			0x20
-#define PO2			0x40
+#define PO2			0x01
 #define PO3			0x80
 #define PO4			0x02
 #define AUX			0x01
@@ -4175,9 +4175,9 @@ void stick_read()
 }
 void trim_read() 
 {
-	PORTD |= PO2|PO3;
+	PORTD |= PO3;
 	PORTD &= ~PO1;
-	PORTE |= PO4;
+	PORTE |= PO2|PO4;
 	_delay_us(60);
 	
 	////////// CH1 (Rudder) //////////////////////////////////////////////////
@@ -4281,7 +4281,8 @@ void trim_read()
 	
 	
 	PORTD |= PO1|PO3;
-	PORTD &= ~PO2;
+	PORTE &= ~PO2;
+	PORTE |= PO4;
 	_delay_us(60);
 	
 	////////// CH3 (Aileron) /////////////////////////////////////////////////
@@ -4333,13 +4334,14 @@ void trim_read()
 		button_tog[5] = OFF;
 	}
 	
-	PORTD |= PO1|PO2|PO3;
-	PORTE |= PO4;
+	PORTD |= PO1|PO3;
+	PORTE |= PO2|PO4;
 }
 void switch_read()
 {
-	PORTD |= PO1|PO2;
+	PORTD |= PO1;
 	PORTD &= ~PO3;
+	PORTE |= PO2|PO4;
 	_delay_us(60);
 	
 	// SW1
@@ -4378,7 +4380,8 @@ void switch_read()
 uint8_t menu_read()
 {
 	PORTD |= PO1|PO3;
-	PORTD &= ~PO2;
+	PORTE &= ~PO2;
+	PORTE |= PO4;
 	_delay_us(60);
 	
 	////////// Multi-input /////////////////////////////////////////
@@ -4444,7 +4447,8 @@ uint8_t menu_read()
 		}
 	}
 	
-	PORTD |= PO1|PO2|PO3;
+	PORTD |= PO1|PO3;
+	PORTE |= PO2|PO4;
 	return 0;
 }
 uint8_t transmitter_bat_chk()
